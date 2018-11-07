@@ -1,5 +1,5 @@
 from mysite import app
-from flask import render_template,session,request
+from flask import render_template,session,request,flash
 
 @app.route('/')
 def home():
@@ -14,4 +14,9 @@ def do_admin_login():
         session['logged_in'] = True
     else:
         flash('wrong password!')
+    return home()
+
+@app.route("/logout")
+def logout():
+    session['logged_in'] = False
     return home()
